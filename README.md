@@ -1,3 +1,6 @@
+
+#SMUHomeWork
+
 File Name: README.txt
 
 Author: Ann Nelson
@@ -10,4 +13,6 @@ Purpose:
    
    Courses included:
            1) Doing Data Science 
-           2) FOundations in Statistics#SMUHomeWWork 
+           2) Foundations in Statistics
+ 
+# SMUHomeWWork end
