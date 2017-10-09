@@ -1,0 +1,49 @@
+Purpose:  To analyze the data of boys and girls names used in 2015 aned 2016 to find the most popular names and the most popular names for girls
+Files used:  yob2016.txt and yob2015.txt
+
+Author Ann Nelson
+Date Created: 10/9/2017
+
+Files: ANelsonMSDS6306_HW5.Rmd
+data files:  yob2016.txt,yob2015.txt
+output files: girls.txt
+
+objects 
+df - initial dataframe before scrubbing of 2016 birthname data
+badname = list of names which met the criteria needing to be filtered
+y2016 = post-filtering 2016 dataset
+y2015 = 2015 dataset
+total = merges 2015 & 2016 dataset
+test = vector of row number indices used to id the names to be filtered from df
+final = post-merge dataframe
+biggest subset of final containing the names with > 30,000 occurances
+female dataframe containing only females named occurances
+top10girls dataframe containing the top 10 female occurances
+
+
+Variables
+names/name -  name bestowed
+gender - gender of child to whom the name was bestowed
+n = number of times the name was bestowed a child of the particular gender
+total = sum of n2016 & n2015
+n2015 - number of named occurances in 2015
+n2016 number of named occurances in 2016
+gender.x - system created after merger of 2015 and 2016 data
+gender.y - system created after merger of 2015 and 2016 data
+top10girls = top 10 most bestowed girls names
+gender.y - system created after merger of 2015 and 2016
+
+procedure:
+read 2016 datafile
+filter the data
+read the 2015 data
+merge the datasets by name
+calculate the total (n2016 + 2015)
+id the most popular names (> 30k total)
+sort the final data set in descending order of total
+id those values > 30K
+id the top 10 names
+subset the data into a dataframe containing only females
+sort the female dataset by descending total
+id the top 10 names
+write out the top 10 names to a csv file
