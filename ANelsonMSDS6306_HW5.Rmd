@@ -1,0 +1,104 @@
+---
+title: "MSDS6306HW5_ANELSON"
+author: "ANelson"
+date: "October 9, 2017"
+output: html_document
+---
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+getwd()
+list.files()
+
+```
+
+## HW 5 QUestion 1a)
+## Import y0b2016.txt into R; assign the dataframe to an object, df, that contains three human readable golumn names read.
+```{r Q1a}
+df <- read.table("yob2016.txt",sep=";",allowEscapes=F)
+colnames(df) <- c("names","gender","n")
+```
+
+#Question 1b) display the summary and structure of df
+```{r Q1b}
+str(df)
+summary(df)
+
+```
+#Question 1c) find the misspelled name
+```{r Q1c}
+test <- grep("yyy+", df$name)
+badname <- df$name[test]
+badname
+```
+
+#Question 1c) find the misspelled name
+```{r Q1d}
+y2016 <- df[!df$name[] == grep("yyy+", df$name),]
+str(y2016)
+```
+
+## HW 5 QUestion 2a)
+## Import yob2015.txt into R; assign the dataframe to an object, df, that contains three human readable golumn names read.
+```{r Q2a}
+y2015 <- read.csv("yob2015.txt", header=FALSE)
+colnames(y2015) <- c("names","gender","n")
+str(y2015)
+```
+#Question 2b) display the last ten rows of y2015 & describe something you find interesting about the last 10 rows
+```{r Q2b}
+tail(y2016,10)
+#the last 10 rows all are male names with the same frequency...5
+```
+#Question 2c) merge y2016 & y2015 by the name column
+```{r Q2c}
+colnames(y2015) <- c("names","gender","n2015")
+colnames(y2016) <- c("names","gender","n2016")
+final <- na.omit(merge(y2016,y2015,by ="names"))
+str(final)
+```
+#Question 3a) Create a new column total in dateframe final (sum of n2015 and n2016), how many people total were given popular names
+### I am defining popular as names with > 30,000 occurances in 2015 + 2016
+
+```{r Q3a}  
+final$total <- final$n2016 + final$n2015
+head(final)
+biggest <- final[(final$total > 30000),]
+str(biggest)
+sum(biggest$total)
+
+#Answer:  THere were 10 names with a total of 343,748 occurances. 
+```
+
+#Question 3c) 10 most popular girl names
+
+```{r Q3c}
+female <- final[(final$gender.x == "F" & final$gender.y == "F"),]
+head(female[ with (female,order(-total)),],10)
+
+```
+#Question 3d) Write the 10 most popular girl names and Totals to a csv file
+
+```{r Q3d}
+top10girls <- head(female[ with (female,order(-total)),],10)
+
+top10girls
+top10girls$gender<- NULL
+top10girls$gender.x <- NULL
+top10girls$gender.y <- NULL
+top10girls$n2015 <- NULL
+top10girls$n2016 <- NULL
+write.table(top10girls,file="girls.txt",row.names = F, sep = ",", col.names = F, quote=F)
+#test that the write worked
+testgirls <- read.csv("girls.txt")
+testgirls
+
+
+```
+# link to gethub repository
+##https://github.com/an1591/SMUHomework
+
+```
+
+
+```
